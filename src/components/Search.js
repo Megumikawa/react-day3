@@ -7,7 +7,6 @@ class Search extends Component {
         this.props = {
             myChange: function
         }
-
     */
 
     render() {

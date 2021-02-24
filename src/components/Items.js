@@ -8,6 +8,7 @@ import AddForm from './AddForm'
 class Items extends Component {
 
     /*
+    // You will get this props
     this.props = {
         onItemAdd: function
     }

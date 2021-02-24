@@ -6,6 +6,8 @@ import Items from './components/Items'
 
 class App extends Component {
 
+
+  // This state is for all items on the right hand side in the screen
   state = {
     totalItems: []
   }
@@ -14,20 +16,23 @@ class App extends Component {
   handleAddItem = (book, quantity) => {
     console.log(book)
     console.log(quantity)
+
+    //let myItem = {...book, quantity}
+
+    // Easy way
     let myItem = {
       title: book.title, 
       price: book.price,
       quantity: quantity
     }
 
+    //Always update the state
     this.setState({
       totalItems: [...this.state.totalItems, myItem]
     })
-
-    //let myItem = {...book, quantity}
   }
 
-  // Watch for prop drilling
+  // We do prop drilling
   render() {
     return (
       <Container>

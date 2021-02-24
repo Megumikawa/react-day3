@@ -3,7 +3,7 @@ import {Card, Button} from 'react-bootstrap'
 
 class ItemDetail extends Component {
     /*
-
+    // This is how your props will look like
     this.props = {
         onItemAdd: function, 
         book: {
@@ -12,11 +12,14 @@ class ItemDetail extends Component {
         }
     }
     */
-
+    
+   // we store the quantity in state
+   //this is done so that when the user clicks the Add button, we can send the quantity from the state itself 
    state = {
        quantity: 1
    } 
 
+   // Track every change in the input
    handleQuantity = (event) => {
         this.setState({
             quantity: event.target.value

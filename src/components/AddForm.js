@@ -1,15 +1,13 @@
 import React, { Component } from 'react'
 
 class AddForm extends Component {
+
     /*
         // your props will look like this
-
         this.props = {
             onAdd: function
         }
-
     */
-
 
     render() {
         const {onAdd} = this.props
