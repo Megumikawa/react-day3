@@ -3,11 +3,19 @@ import axios from 'axios'
 import {Spinner} from 'react-bootstrap'
 import ItemDetail from './ItemDetail'
 import Search from './Search'
+import AddForm from './AddForm'
 
 class Items extends Component {
 
+    /*
+    this.props = {
+        onItemAdd: function
+    }
+    */
+
     state = {
         books: [],
+        showForm: false,
         filteredBooks: [], //create a clone state for filter
     }
     
@@ -30,6 +38,24 @@ class Items extends Component {
         })
     }
 
+    handleAddForm = (event) => {
+        // preventing the default browser behaviour
+        // is. ?title='something'&price=24
+        event.preventDefault()
+        let title = event.target.title.value
+        let price = event.target.price.value
+        // create an object in the same structure your data is in
+        let newItem = { 
+            title: title, 
+            price: price
+        }
+
+        this.setState({
+            showForm: false, 
+            books: [ newItem, ...this.state.books],
+            filteredBooks:  [newItem, ...this.state.filteredBooks]
+        })
+    }
 
     handleChange = (event) => { 
         // remember that these are event listener callbacks. 
@@ -50,9 +76,13 @@ class Items extends Component {
         })
     }
 
+    handleShowForm = () => {
+        this.setState({ showForm: true })
+    }
+
     render() {
         //destructure the state
-        const {books,filteredBooks} = this.state
+        const {books,filteredBooks, showForm} = this.state
 
         //------- CONDITIONALLY RENDERING SPINNERS ----------------
         // check if we have books in our state
@@ -66,9 +96,15 @@ class Items extends Component {
                 <h1 >Lists</h1>
                 <Search  myChange={this.handleChange}/>
                 {
+                    showForm ? <AddForm onAdd={this.handleAddForm}/> :  <button onClick={this.handleShowForm}>Show</button>
+                }
+               
+                {
                     // we loop over the filtered books, not the original books
                     filteredBooks.map((singleBook, index) => {
-                        return <ItemDetail key={index} 
+                        return <ItemDetail 
+                        onItemAdd={this.props.onItemAdd}
+                        key={index} 
                         book={singleBook} />
                     })
                 }
